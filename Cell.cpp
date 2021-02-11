@@ -1,5 +1,5 @@
 #include "Cell.h"
-
+// seeing if i can change this
 std::vector<Cell*> all_cells; 
 
 Cell::Cell()
