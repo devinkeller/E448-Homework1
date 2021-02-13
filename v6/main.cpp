@@ -4,6 +4,7 @@
 #include <vector>
 #include <random> 
 #include <cmath>
+#include <time.h>
 
 #include "Cell.h" 
 #include "save.h" 
@@ -11,9 +12,28 @@
 
 std::string version = "v6"; 
 
+void tic( double &start_Time)
+{
+	clock_t start = clock();
+	start_Time = start;
+}
+
+void toc( double &total_Time, double start_Time )
+{
+	clock_t end_Time = clock();
+	total_Time = (double)(end_Time - start_Time)/CLOCKS_PER_SEC;
+}
+
+void display_stopwatch( double total_Time   )
+{
+	std::cout << "Time Elapsed = " << total_Time << std::endl;
+}
+
 int main( int argc, char* argv[] )
 {
 	std::cout << "starting version " << version << " ... " << std::endl;
+	double main_start;
+	tic(main_start);
 	
 	// parse settings 
 	
@@ -33,7 +53,7 @@ int main( int argc, char* argv[] )
 	}
 	
 	// place cells 
-	int number_of_cells = 50; 
+	int number_of_cells = 50; // base  = 50
 	Cell* pCell;
 	// random positions 
 	for( int n=0; n < number_of_cells ; n++ )
@@ -78,6 +98,10 @@ int main( int argc, char* argv[] )
 	}
 	
 	std::cout << "done!"  << std::endl;
+	
+	double main_end;
+	toc(main_end, main_start);
+	display_stopwatch(main_end);
 	
 	return 0; 
 }
